@@ -1,0 +1,1 @@
+# Storage to save and load data from JSON
