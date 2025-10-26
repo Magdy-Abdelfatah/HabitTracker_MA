@@ -15,12 +15,12 @@ def to_iso(date_time):
     return date_time.strftime(ISO_FORMAT)
 
 def daily_key(iso_timestamp):
-    """Return (year, month, day) for daily grouping."""
+    """Return (year, month, day) as a tuple (2025, 9, 3) for daily grouping."""
     date_obj = parse_iso(iso_timestamp)
     return (date_obj.year, date_obj.month, date_obj.day)
 
 def weekly_key(iso_timestamp):
-    """Return (ISO year, ISO week) for weekly grouping."""
+    """Return (year,  week) as tuple for weekly grouping."""
     date_obj = parse_iso(iso_timestamp)
     iso_year, iso_week, _ = date_obj.isocalendar()
     return (iso_year, iso_week)
