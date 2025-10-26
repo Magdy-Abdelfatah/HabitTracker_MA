@@ -18,11 +18,9 @@ def daily_runs(day_keys):
     """
     if not day_keys:
         return 0, 0, 0
-
     days = sorted(day_keys)  # ensure chronological order
     current_run = 1          # at least the first day counts as a run of 1
     longest_run = 1
-
     # Walk through the days and check if each day follows the previous by exactly 1 day
     for i in range(1, len(days)):
         prev_day = date(*days[i - 1])
@@ -87,3 +85,27 @@ def streak_summary_for(habit):
             "longest_streak": longest_run,
             "unit": "weeks",
         }
+
+def longest_daily_streak(habits):
+    """Find the daily habit with the highest longest streak."""
+    best_habit = None
+    best_streak = 0
+    for h in habits:
+        if h.periodicity == "daily":
+            summary = streak_summary_for(h)
+            if summary["longest_streak"] > best_streak:
+                best_streak = summary["longest_streak"]
+                best_habit = h.name
+    return best_habit, best_streak, "days"
+
+def longest_weekly_streak(habits):
+    """Find the weekly habit with the highest longest streak."""
+    best_habit = None
+    best_streak = 0
+    for h in habits:
+        if h.periodicity == "weekly":
+            summary = streak_summary_for(h)
+            if summary["longest_streak"] > best_streak:
+                best_streak = summary["longest_streak"]
+                best_habit = h.name
+    return best_habit, best_streak, "weeks"

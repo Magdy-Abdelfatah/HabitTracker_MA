@@ -10,7 +10,7 @@ class Habit:
     def __init__(self, name: str, periodicity: str, created_at=None, completions=None):
         self.name = name.strip()
         self.periodicity = periodicity
-        self.created_at = created_at or datetime.now().strftime("%Y-%m-%dT%H:%M")
+        self.created_at = created_at or datetime.now().strftime("%Y-%m-%d")
         self.completions = completions if completions is not None else []
 
     def add_completion(self, completion: str):
