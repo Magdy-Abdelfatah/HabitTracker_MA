@@ -10,7 +10,6 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
 REAL_FILE = os.path.join(PROJECT_ROOT, "habits.json")
 DEMO_FILE = os.path.join(PROJECT_ROOT, "demo_user_habits.json")
 TEST_FILE = os.path.join(PROJECT_ROOT, "test_habits.json")
-CURRENT_PROFILE = "real"
 FILE_PATH = REAL_FILE
 
 def use_test_file():
