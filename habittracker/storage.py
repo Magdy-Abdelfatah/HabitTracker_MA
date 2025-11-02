@@ -1,43 +1,52 @@
-# Storage to save and load data from JSON
-"""
+""""
 Handles saving and loading habits in JSON format.
-Each profile (real or demo) has its own file.
+Each profile (real or demo) uses its own file.
 """
 import json
 import os
-from habit import habit_from_dict
+from habittracker.habit import habit_from_dict
 
-CURRENT_PROFILE = "real"
-FILE_PATH = "habits.json"
+PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
+REAL_FILE = os.path.join(PROJECT_ROOT, "habits.json")
+DEMO_FILE = os.path.join(PROJECT_ROOT, "demo_user_habits.json")
+TEST_FILE = os.path.join(PROJECT_ROOT, "test_habits.json")
+FILE_PATH = REAL_FILE
+
+def use_test_file():
+    """Switch to a separate JSON file used only for testing."""
+    global FILE_PATH
+    FILE_PATH = TEST_FILE
 
 def set_profile(profile):
     """Switch between real and demo profiles."""
-    global CURRENT_PROFILE, FILE_PATH
-    if profile == "demo":
-        CURRENT_PROFILE = "demo"
-        FILE_PATH = "demo_user_habits.json"
-    else:
-        CURRENT_PROFILE = "real"
-        FILE_PATH = "habits.json"
+    global FILE_PATH
+    FILE_PATH = DEMO_FILE if profile == "demo" else REAL_FILE
 
 def init_storage():
-    """Make sure the JSON file exists."""
+    """
+    Create the JSON file if it does not exist.
+    """
     if not os.path.exists(FILE_PATH):
-        with open(FILE_PATH, "w") as file: #opens the file in "w" mode
-            json.dump([], file) #creates the file with an empty list
+        with open(FILE_PATH, "w") as file:
+            json.dump([], file)  # start with an empty list
 
 def load_habits():
-    """Load Habit from the JSON file."""
+    """
+    Load all habits from the JSON file.
+    Returns a list of Habit objects.
+    """
     try:
-        with open(FILE_PATH, "r") as file: #opens the file in "r" mode
-            data = json.load(file)
-            return [habit_from_dict(item) for item in data]
+        with open(FILE_PATH, "r") as file:
+            data = json.load(file)  # read JSON data
+            return [habit_from_dict(item) for item in data]  # convert dicts to Habit objects
     except:
-        # If the file is missing or broken, start fresh
+        # If the file is missing or broken, create a new empty file
         save_habits([])
         return []
 
 def save_habits(habits):
-    """Saves Habits to the JSON file."""
-    with open(FILE_PATH, "w") as file: #opens the file in "w" mode
-        json.dump([h.to_dict() for h in habits], file, indent=2) #indent to split into 2 lines (easier overview)
+    """
+    Save all habits to the JSON file.
+    """
+    with open(FILE_PATH, "w") as file:
+        json.dump([h.to_dict() for h in habits], file, indent=2)  # indent=2 makes it easier to read"
