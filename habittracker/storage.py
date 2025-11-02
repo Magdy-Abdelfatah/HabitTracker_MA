@@ -50,4 +50,3 @@ def save_habits(habits):
     """
     with open(FILE_PATH, "w") as file:
         json.dump([h.to_dict() for h in habits], file, indent=2)  # indent=2 makes it easier to read
-
