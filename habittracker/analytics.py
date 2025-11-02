@@ -1,6 +1,6 @@
 
 from datetime import date
-from time_utils import daily_key, weekly_key
+from habittracker.time_utils import daily_key, weekly_key
 
 def list_all_habits(habits):
     """Return (name, periodicity) pairs for simple listing."""
