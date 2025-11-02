@@ -3,7 +3,6 @@ Helper functions for working with dates in ISO format.
 All dates are represented as 'YYYY-MM-DD' strings.
 """
 from datetime import datetime
-
 ISO_FORMAT = "%Y-%m-%d"
 
 def parse_iso(iso_timestamp: str) -> datetime:
