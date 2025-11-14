@@ -13,7 +13,7 @@ def is_future(date_object):
 def add_habit(name, periodicity):
     """Add a new habit if it doesn’t already exist."""
     name = name.strip()
-    if len(name) == 0 or " ":
+    if len(name) == 0:
         return False
     habits = load_habits()
     for h in habits:
