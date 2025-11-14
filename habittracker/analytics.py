@@ -17,7 +17,7 @@ def daily_runs(day_keys):
     day_keys is a list of (Y, M, D) tuples.
     """
     if not day_keys:
-        return 0, 0, 0
+        return 0, 0
     days = sorted(day_keys)  # ensure chronological order
     current_run = 1          # at least the first day counts as a run of 1
     longest_run = 1
